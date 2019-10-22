@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="bin/bootstrap-grid.css">
+    <link type="text/css" rel="stylesheet" href="bin/style.css">
+    <script src="script.js" defer></script>
+    <title>ToDo App</title>
+</head>
+<body>
+<div id="add_list_modal" class="cover" style="display: none;">
+    <div class="modal">
+        <h1>Add List</h1>
+        <span class="close" onclick="closeModal()">+</span>
+        <div class="form">
+            <div class="flex">
+                <input id="list_name" type="text" placeholder="List Name">
+                <div class="colorPicker"></div>
+            </div>
+            <button onclick="addList()">Add</button>
+        </div>
+    </div>
+</div>
+<div id="lists_container" class="row">
+    <div class="col-4">
+        <div>
+            <h3>List Name</h3>
+            <ul>
+                <li>List Item<input type="checkbox"></li>
+                <li><textarea class="col-12" placeholder="new list item..." rows="1" onkeydown="textAreaKey(event)"></textarea></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button id="add_list" onclick="openAddListModal()">+</button>
+</body>
+</html>
