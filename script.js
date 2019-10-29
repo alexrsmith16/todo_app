@@ -16,10 +16,10 @@ for (let i in colorsArray) {
 }
 COLOR_PICKER.innerHTML = colorElements;
 
-if (localStorage.getItem("lists") === null) {
+if (localStorage.getItem("lists") === null ) {
     localStorage.setItem("lists", JSON.stringify([]));
 }
-else {
+else if (JSON.parse(localStorage.getItem("lists")).length !== 0) {
     writeEachList();
 }
 
@@ -55,6 +55,7 @@ function createList(name, color) {
 }
 
 function openAddListModal() {
+    if (JSON.parse(localStorage.getItem("lists")).length === 0) LISTS_CONTAINER.innerHTML = "";
     ADD_MODAL.style.display = "flex";
     COLOR_CHOSEN.style.backgroundColor = colorsArray[0];
 }

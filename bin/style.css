@@ -1,6 +1,7 @@
 html, body {
     font-family: Helvetica, serif;
     margin: 0;
+    height: 100%;
     /*background-color: #414141;*/
 }
 
@@ -136,6 +137,11 @@ button.cancel:hover {
     display: flex;
     justify-content: space-around;
     padding: 0 15px;
+    height: 100%;
+}
+
+#lists_container > h1 {
+    margin: auto;
 }
 
 .col-4 {
