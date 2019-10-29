@@ -71,7 +71,7 @@ input:focus {
     display: none;
     position: absolute;
     flex-wrap: wrap;
-    width: 160px;
+    width: 120px;
     left: 220px;
     top: 15px;
 }

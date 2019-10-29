@@ -3,8 +3,9 @@ const COLOR_CHOSEN = document.getElementById("color_chosen");
 const COLOR_PICKER = document.getElementById("color_picker");
 let tx = document.getElementsByTagName('textarea');
 let textHolder = document.getElementsByClassName("text-holder");
-let colorsArray = ["rgb(232, 160, 200)", "rgb(255, 102, 102)", "rgb(206, 138, 81)", "rgb(206,163,67)",
-    "rgb(135, 185, 89)", "rgb(114, 177, 127)", "rgba(134,194,202)", "rgb(138, 177, 236)"];
+let colorsArray = ["rgb(232, 160, 200)", "rgb(255, 102, 102)", "rgb(206, 138, 81)",
+                    "rgb(206,163,67)", "rgb(135, 185, 89)", "rgb(114, 177, 127)",
+                    "rgba(134,194,202)", "rgb(138, 177, 236)", "rgb(187, 164, 255)"];
 
 let colorElements = "";
 for (let i in colorsArray) {
