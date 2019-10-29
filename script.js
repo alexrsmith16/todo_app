@@ -3,7 +3,14 @@ const COLOR_CHOSEN = document.getElementById("color_chosen");
 const COLOR_PICKER = document.getElementById("color_picker");
 let tx = document.getElementsByTagName('textarea');
 let textHolder = document.getElementsByClassName("text-holder");
-let colorsArray = ["#6C3855", "#C63E4A", "#CEA343", "#19705B", "#728D6A", "#C43448", "#86C2CA", "#BF755D"];
+let colorsArray = ["rgb(232, 160, 200)", "rgb(255, 102, 102)", "rgb(206, 138, 81)", "rgb(206,163,67)",
+    "rgb(135, 185, 89)", "rgb(114, 177, 127)", "rgba(134,194,202)", "rgb(138, 177, 236)"];
+
+let colorElements = "";
+for (let i in colorsArray) {
+    colorElements += `<div data-id="${i}" class="color-item" style="background-color: ${colorsArray[i]}" onclick="closeColors(this)"></div>`;
+}
+COLOR_PICKER.innerHTML = colorElements;
 
 if (localStorage.getItem("lists") === null) {
     localStorage.setItem("lists", JSON.stringify([]));
@@ -109,11 +116,6 @@ function writeList(list) {
         </div></div>`;
     LISTS_CONTAINER.insertAdjacentHTML("beforeend", newListElement);
     watchTextArea();
-    let colorElements = "";
-    for (let i in colorsArray) {
-        colorElements += `<div data-id="${i}" class="color-item" style="background-color: ${colorsArray[i]}" onclick="closeColors(this)"></div>`;
-    }
-    COLOR_PICKER.innerHTML = colorElements;
 }
 
 function textAreaKey(event) {
