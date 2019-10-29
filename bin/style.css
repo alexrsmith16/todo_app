@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
-input {
+.modal input {
     border: none;
     border-bottom: 2px solid #0f6674;
     width: 200px;
@@ -123,19 +123,74 @@ button#add_list:hover {
     padding: 10px;
 }
 
-.col-4 ul {
+ul {
     list-style-type: none;
     padding: 0;
 }
 
-.col-4 li {
-    font-size: 12px;
-    margin: 10px 0 0 0;
+li {
+    font-size: 14px;
+    font-weight: 100;
+    padding: 5px 0;
     border-bottom: 1px solid #838383;
-    line-height: 0;
+    line-height: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+li .text-holder {
+    /*max-width: 310px;*/
+}
+
+li.completed-item {
+    color: #00000070;
+    text-decoration: line-through;
+}
+
+li.active-item:hover  .checkbox-holder {
+    display: flex;
+}
+
+li.active-item  .checkbox-holder {
+    display: none;
+    height: 18px;
+}
+
+li.active-item  .checkbox {
+    -webkit-appearance: none;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: none;
+    width: 18px;
+    height: 18px;
+    padding: 1px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.checkbox:hover, .checkbox > label:hover {
+    cursor: pointer;
+}
+
+.checkbox label {
+    display: none;
+}
+
+.checkbox.complete {
+    margin-right: 5px;
+}
+
+.checkbox.delete label {
+    font-size: 25px;
+    line-height: 10px;
+}
+
+.checkbox:hover > label {
+    display: block;
 }
 
 .col-4 textarea {
+    font-size: 14px;
+    font-weight: 100;
     background-color: #9fcdff;
     padding: 0;
     border: none;
@@ -144,4 +199,14 @@ button#add_list:hover {
 
 .col-4 textarea:focus {
     outline: none;
+}
+
+.col-4 button {
+    background-color: transparent;
+    color: #000000;
+    border-color: #838383;
+}
+
+.col-4 button:hover {
+    border-color: #000000;
 }
