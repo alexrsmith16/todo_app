@@ -1,5 +1,6 @@
 const LISTS_CONTAINER = document.getElementById("lists_container");
 let tx = document.getElementsByTagName('textarea');
+let textHolder = document.getElementsByClassName("text-holder");
 
 if (localStorage.getItem("lists") === null) {
     localStorage.setItem("lists", JSON.stringify([]));
@@ -13,6 +14,9 @@ function watchTextArea() {
         tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
         tx[i].addEventListener("input", OnInput, false);
         tx[i].addEventListener("keyup", textAreaKey);
+    }
+    for (let i of textHolder) {
+        i.addEventListener("keyup", updateItem);
     }
 }
 watchTextArea();
@@ -72,7 +76,7 @@ function writeList(list) {
         for (let i in list.listItemsArray) {
             newListElement += `
             <li data-id="${i}" class="active-item">
-                <div class="text-holder">${list.listItemsArray[i]}</div>
+                <div class="text-holder" contenteditable="true">${list.listItemsArray[i]}</div>
                 <div class="checkbox-holder">
                     <div type="checkbox" class="checkbox complete"><label onclick="completeItem(event)">&#10003;</label></div>
                     <div type="checkbox" class="checkbox delete"><label onclick="deleteItem(event)">&#65794;</label></div>
@@ -96,6 +100,14 @@ function textAreaKey(event) {
         addItem(event.target.getAttribute("data-id"), event.target.value);
         event.target.value = "";
     }
+}
+
+function updateItem(event) {
+    let itemID = event.target.parentElement.getAttribute("data-id");
+    let listID = "list_" + event.target.parentElement.parentElement.getAttribute("data-id");
+    let list = JSON.parse(localStorage.getItem(listID));
+    list.listItemsArray[itemID] = event.target.innerText;
+    localStorage.setItem(listID, JSON.stringify(list));
 }
 
 function addItem(listId, text) {
@@ -129,7 +141,6 @@ function clearItems(event) {
     let listID = "list_" + event.target.getAttribute("data-id");
     let list = JSON.parse(localStorage.getItem(listID));
     list.listCompletedItems = [];
-    console.log(list);
     localStorage.setItem(listID, JSON.stringify(list));
     writeEachList();
 }
@@ -139,7 +150,6 @@ function deleteList(event) {
     localStorage.removeItem("list_" + listID);
     let lists = JSON.parse(localStorage.getItem("lists"));
     let index = lists.indexOf(listID);
-    console.log(index);
     lists.splice(index, 1);
     localStorage.setItem("lists", JSON.stringify(lists));
     writeEachList();

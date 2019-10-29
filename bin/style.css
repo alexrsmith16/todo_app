@@ -138,8 +138,8 @@ li {
     justify-content: space-between;
 }
 
-li .text-holder {
-    /*max-width: 310px;*/
+li .text-holder:focus {
+    outline: none;
 }
 
 li.completed-item {
