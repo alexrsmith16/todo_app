@@ -1,11 +1,14 @@
+const ADD_MODAL = document.getElementById("add_list_modal");
 const LISTS_CONTAINER = document.getElementById("lists_container");
 const COLOR_CHOSEN = document.getElementById("color_chosen");
 const COLOR_PICKER = document.getElementById("color_picker");
+const ARE_YOU_SURE = document.getElementById("are_you_sure");
 let tx = document.getElementsByTagName('textarea');
 let textHolder = document.getElementsByClassName("text-holder");
 let colorsArray = ["rgb(232, 160, 200)", "rgb(255, 102, 102)", "rgb(206, 138, 81)",
                     "rgb(206,163,67)", "rgb(135, 185, 89)", "rgb(114, 177, 127)",
                     "rgba(134,194,202)", "rgb(138, 177, 236)", "rgb(187, 164, 255)"];
+let holdEvent;
 
 let colorElements = "";
 for (let i in colorsArray) {
@@ -50,8 +53,6 @@ function createList(name, color) {
     listsArray.push(list.id);
     localStorage.setItem("lists", JSON.stringify(listsArray));
 }
-
-const ADD_MODAL = document.getElementById("add_list_modal");
 
 function openAddListModal() {
     ADD_MODAL.style.display = "flex";
@@ -114,7 +115,7 @@ function writeList(list) {
         newListElement +=`</ul>
         <div class="list-buttons">
             <button data-id="${list.id}" onclick="clearItems(event)">Clear Completed Items</button>
-            <button data-id="${list.id}" onclick="deleteList(event)">Delete List</button>
+            <button data-id="${list.id}" onclick="openDoubleCheck(event)">Delete List</button>
         </div>
         </div></div>`;
     LISTS_CONTAINER.insertAdjacentHTML("beforeend", newListElement);
@@ -171,12 +172,22 @@ function clearItems(event) {
     writeEachList();
 }
 
-function deleteList(event) {
-    let listID = parseInt(event.target.getAttribute("data-id"));
+function deleteList() {
+    ARE_YOU_SURE.style.display = "none";
+    let listID = parseInt(holdEvent.target.getAttribute("data-id"));
     localStorage.removeItem("list_" + listID);
     let lists = JSON.parse(localStorage.getItem("lists"));
     let index = lists.indexOf(listID);
     lists.splice(index, 1);
     localStorage.setItem("lists", JSON.stringify(lists));
     writeEachList();
+}
+
+function openDoubleCheck(event) {
+    holdEvent = event;
+    ARE_YOU_SURE.style.display = "flex";
+}
+
+function cancelDelete() {
+    ARE_YOU_SURE.style.display = "none";
 }

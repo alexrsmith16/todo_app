@@ -8,7 +8,7 @@
     <title>ToDo App</title>
 </head>
 <body>
-<div id="add_list_modal" class="cover" style="display: none;">
+<div id="add_list_modal" class="cover">
     <div class="modal">
         <h1>Add List</h1>
         <span class="close" onclick="closeModal()">+</span>
@@ -19,6 +19,15 @@
                 <div id="color_picker"></div>
             </div>
             <button onclick="addList()">Add</button>
+        </div>
+    </div>
+</div>
+<div id="are_you_sure" class="cover">
+    <div class="modal">
+        <h2>Are You Sure? This is permanent.</h2>
+        <div class="list-buttons">
+            <button class="cancel" onclick="cancelDelete()">Cancel</button>
+            <button onclick="deleteList()">Yes, Delete</button>
         </div>
     </div>
 </div>
