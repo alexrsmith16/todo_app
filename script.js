@@ -112,8 +112,10 @@ function writeList(list) {
             newListElement += `<li class="completed-item">${list.listCompletedItems[i]}</li>`;
         }
         newListElement +=`</ul>
-        <button data-id="${list.id}" onclick="clearItems(event)">Clear Completed Items</button>
-        <button data-id="${list.id}" onclick="deleteList(event)">Delete List</button>
+        <div class="list-buttons">
+            <button data-id="${list.id}" onclick="clearItems(event)">Clear Completed Items</button>
+            <button data-id="${list.id}" onclick="deleteList(event)">Delete List</button>
+        </div>
         </div></div>`;
     LISTS_CONTAINER.insertAdjacentHTML("beforeend", newListElement);
     watchTextArea();

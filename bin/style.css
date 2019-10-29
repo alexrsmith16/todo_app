@@ -219,3 +219,8 @@ li.active-item  .checkbox {
 .col-4 button:hover {
     border-color: #000000;
 }
+
+.list-buttons {
+    display: flex;
+    justify-content: space-between;
+}
