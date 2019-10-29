@@ -58,6 +58,7 @@ function openAddListModal() {
     if (JSON.parse(localStorage.getItem("lists")).length === 0) LISTS_CONTAINER.innerHTML = "";
     ADD_MODAL.style.display = "flex";
     COLOR_CHOSEN.style.backgroundColor = colorsArray[0];
+    document.getElementById("list_name").focus();
 }
 
 function openColors() {
@@ -143,6 +144,7 @@ function addItem(listId, text) {
     list.listItemsArray.push(text);
     localStorage.setItem("list_" + listId, JSON.stringify(list));
     writeEachList();
+    document.getElementById("list_" + listId).getElementsByTagName("textarea")[0].focus();
 }
 
 function completeItem(event) {
