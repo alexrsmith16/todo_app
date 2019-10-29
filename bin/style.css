@@ -1,6 +1,7 @@
 html, body {
     font-family: Helvetica, serif;
     margin: 0;
+    /*background-color: #414141;*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,13 +58,22 @@ input:focus {
     outline: none;
 }
 
-.colorPicker {
+#color_chosen, .color-item {
     background-color: #5A1C32;
     width: 20px;
     height: 20px;
     border-radius: 50px;
     margin: 10px 0 0 20px;
     cursor: pointer;
+}
+
+#color_picker {
+    display: none;
+    position: absolute;
+    flex-wrap: wrap;
+    width: 160px;
+    left: 220px;
+    top: 15px;
 }
 
 button {
@@ -117,8 +127,7 @@ button#add_list:hover {
     padding: 15px;
 }
 
-.col-4 > div{
-    background-color: #9fcdff;
+.col-4 > div {
     border-radius: 5px;
     padding: 10px;
 }
@@ -191,7 +200,7 @@ li.active-item  .checkbox {
 .col-4 textarea {
     font-size: 14px;
     font-weight: 100;
-    background-color: #9fcdff;
+    background-color: transparent;
     padding: 0;
     border: none;
     resize: none;

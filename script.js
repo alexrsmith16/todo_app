@@ -1,6 +1,9 @@
 const LISTS_CONTAINER = document.getElementById("lists_container");
+const COLOR_CHOSEN = document.getElementById("color_chosen");
+const COLOR_PICKER = document.getElementById("color_picker");
 let tx = document.getElementsByTagName('textarea');
 let textHolder = document.getElementsByClassName("text-holder");
+let colorsArray = ["#6C3855", "#C63E4A", "#CEA343", "#19705B", "#728D6A", "#C43448", "#86C2CA", "#BF755D"];
 
 if (localStorage.getItem("lists") === null) {
     localStorage.setItem("lists", JSON.stringify([]));
@@ -26,7 +29,7 @@ function OnInput() {
     this.style.height = (this.scrollHeight) + 'px';
 }
 
-function createList(name, color = "#688bff") {
+function createList(name, color) {
     let listsArray = JSON.parse(localStorage.getItem("lists"));
     let list = {};
     list.id = listsArray.length === 0 ? 0 : listsArray[listsArray.length - 1] + 1;
@@ -44,12 +47,25 @@ const ADD_MODAL = document.getElementById("add_list_modal");
 
 function openAddListModal() {
     ADD_MODAL.style.display = "flex";
+    COLOR_CHOSEN.style.backgroundColor = colorsArray[0];
+}
+
+function openColors() {
+    COLOR_PICKER.style.display = "flex";
+    COLOR_CHOSEN.style.display = "none";
+}
+
+function closeColors(element) {
+    COLOR_CHOSEN.style.backgroundColor = element.style.backgroundColor;
+    COLOR_CHOSEN.style.display = "block";
+    COLOR_PICKER.style.display = "none";
 }
 
 function addList() {
     const LIST_NAME = document.getElementById("list_name");
     let name = LIST_NAME.value;
-    createList(name);
+    let color = COLOR_CHOSEN.style.backgroundColor;
+    createList(name, color);
     LIST_NAME.value = "";
     ADD_MODAL.style.display = "none";
 }
@@ -70,7 +86,7 @@ function writeEachList() {
 
 function writeList(list) {
     let newListElement =`
-        <div id="list_${list.id}" class="col-4"><div>
+        <div id="list_${list.id}" class="col-4"><div style="background-color: ${list.color}">
             <h2>${list.name}</h2>
             <ul id="list_${list.id}_items" data-id="${list.id}">`;
         for (let i in list.listItemsArray) {
@@ -93,6 +109,11 @@ function writeList(list) {
         </div></div>`;
     LISTS_CONTAINER.insertAdjacentHTML("beforeend", newListElement);
     watchTextArea();
+    let colorElements = "";
+    for (let i in colorsArray) {
+        colorElements += `<div data-id="${i}" class="color-item" style="background-color: ${colorsArray[i]}" onclick="closeColors(this)"></div>`;
+    }
+    COLOR_PICKER.innerHTML = colorElements;
 }
 
 function textAreaKey(event) {
